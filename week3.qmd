@@ -1,0 +1,70 @@
+---
+title: "week 3"
+author: "weiheng wang"
+format: html
+editor: visual
+---
+
+```{r}
+install.packages("tidyverse")
+
+install.packages("palmerpenguins")
+
+```
+
+```{r}
+library(tidyverse)
+
+tibble(year = 1700:1988,
+       sunspots = as.numeric(datasets::sunspot.year) |> round(0)) |>
+  ggplot(aes(x = sunspots)) +
+  geom_histogram( 
+                 fill = "skyblue", 
+                 color = "black", 
+                 alpha = 0.7) +
+  labs(title = "Distribution of Sunspot Counts (1700-1988)", 
+       x = "Sunspot Count (Rounded)", 
+       y = "Frequency") + theme_minimal() + theme(plot.title = element_text(hjust = 0.5, size = 16),axis.title = element_text( size = 12),
+        axis.text = element_text(size = 10)) +
+  scale_x_continuous(breaks = seq(0, max(datasets::sunspot.year), by = 50))
+```
+
+```{r}
+library(palmerpenguins)
+library(tidyverse)
+
+ggplot(data = penguins,
+       aes(x = flipper_length_mm,
+           y = body_mass_g)) +
+  geom_point(aes(color = species,
+                 shape = species),
+             size = 3.5,  # 保持较大的点大小
+             alpha = 0.5) +  # 透明度调整为0.5
+  scale_color_manual(values = c("darkorange", "purple", "cyan4")) +
+  scale_shape_manual(values = c(16, 17, 18)) +  # 不同形状
+  labs(
+    title = "Penguin Size at Palmer Station LTER",
+    subtitle = "Relationship between Flipper Length and Body Mass",
+    caption = "Source: Palmer Penguins dataset",
+    x = "Flipper Length (mm)",
+    y = "Body Mass (g)",
+    color = "Penguin Species",
+    shape = "Penguin Species"
+  ) +
+  theme_minimal(base_size = 14) +  # 调整字体大小
+  theme(
+    plot.title = element_text(face = "bold", size = 18, hjust = 0.5),
+    plot.subtitle = element_text(size = 14, hjust = 0.5),
+    legend.position = c(0.15, 0.8),
+    legend.background = element_rect(fill = "gray95", color = "black", size = 0.5),
+    legend.key = element_blank(),
+    plot.caption = element_text(hjust = 0, face = "italic"),
+    plot.caption.position = "plot",
+    panel.grid.major = element_line(color = "gray85", size = 0.5),
+    panel.grid.minor = element_blank()
+  ) +
+  annotate("text", x = 200, y = 3500, label = "Gentoo Penguins are generally larger", 
+           color = "cyan4", size = 5, fontface = "italic")  # 添加注释
+
+
+```
