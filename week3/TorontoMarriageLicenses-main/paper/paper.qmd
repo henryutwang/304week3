@@ -2,7 +2,7 @@
 title: "Marriage Licenses"
 subtitle: "Empicical Analysis of Marriage Licenses in Toronto"
 author: 
-  - Chenika Bukes
+  - weiheng wang
 thanks: "Code and data are available at: "
 date: today
 date-format: long
